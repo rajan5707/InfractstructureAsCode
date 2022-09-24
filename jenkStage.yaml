@@ -1,0 +1,25 @@
+- hosts: jenkStage-1 
+  become: yes
+  #  remote_user: ec2-user
+  #  become_user: root
+  tasks:
+  - name: yum update
+    yum:
+      name: '*'
+      state: latest
+  - name:
+    yum:
+      name: java
+      state: latest
+
+  - name: install Docker
+    yum:
+      name: docker
+      state: present
+      update_cache: true
+
+  - name: start Docker
+    service:
+      name: docker
+      state: started
+      enabled: true
